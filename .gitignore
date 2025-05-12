@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+db.sqlite3
+
+# 虛擬環境
+env/
+venv/
+
+# Media uploads
+/media/
+media/
+
+# VSCode
+.vscode/
+
+# 系統檔
+.DS_Store
+Thumbs.db
