@@ -1,5 +1,6 @@
 from django.urls import path, include #定義一條網址路由/把路由處理權轉交給別的模組
 from . import views
+from .views import cancel_registration
  
 urlpatterns = [
     path('', views.homepage, name='homepage'), # 當有人訪問 / → 執行 views.homepage()aka設一條 API 路徑
@@ -10,6 +11,7 @@ urlpatterns = [
     path('post-login/', views.post_login_redirect, name='post_login_redirect'),
     path('api/complete-profile/', views.complete_profile_api,name='complete-profile'),
     path('api/check-profile/', views.check_profile_status),
+    path('api/cancel/', cancel_registration),
 
 
 ]

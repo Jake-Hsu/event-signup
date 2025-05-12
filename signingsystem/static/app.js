@@ -197,22 +197,59 @@ function updateMyEvents() {
     container.innerHTML = "";
 
     myRegistrations.forEach(event => {
-        const card = document.createElement("div");
-        card.className = "event-card";
-        card.innerHTML = `
-        ${event.photo ? `
+      const card = document.createElement("div");
+      card.className = "event-card";
+      card.innerHTML = `
+      ${event.photo ? `
         <img src="${event.photo}" alt="活動照片" style="width:100%; height:auto; border-radius:8px 8px 0 0;">` : ''}
         <div style="padding: 10px;">
-            <h2>${event.name}</h2>
-            <p>地點：${event.location}</p>
-            <p>日期：${event.date}</p> 
-            <p>主辦單位：${event.organizer ? event.organizer : '暫無資料'}</p>
+        <h2>${event.name}</h2>
+        <p>地點：${event.location}</p>
+        <p>日期：${event.date}</p> 
+        <p>主辦單位：${event.organizer ? event.organizer : '暫無資料'}</p>
             
         </div>
+      
     `;
-        container.appendChild(card);
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "取消報名";
+    cancelButton.style.marginTop = "10px";
+    cancelButton.style.backgroundColor = "#e74c3c";
+    cancelButton.style.color = "white";
+    cancelButton.onclick = () => cancelRegistration(event.id);
+
+    card.appendChild(cancelButton);
+
+    container.appendChild(card);
     });
 }
+
+//====取消報名====//
+function cancelRegistration(eventId) {
+  if (!confirm("確定要取消報名這個活動嗎？")) return;
+
+  fetch(`/api/cancel/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify({ event_id: eventId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+    if (data.success) {
+      // 從 myRegistrations 移除該活動
+      myRegistrations = myRegistrations.filter(e => e.id !== eventId);
+      updateMyEvents(); // 重新渲染我的報名
+    }
+  })
+  .catch(error => {
+    console.error("取消報名時發生錯誤：", error);
+  });
+}
+
 
 //====一鍵註冊====//
 function googleOAuthLogin() {

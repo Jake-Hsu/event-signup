@@ -56,6 +56,26 @@ def register_event(request):
             return JsonResponse({'success': False, 'message': '找不到活動'}, status=404)
     else:
         return JsonResponse({'success': False, 'message': '只接受 POST 方法'}, status=405)    
+#====取消報名====#
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from .models import Registration
+import json
+
+@csrf_exempt
+@login_required
+def cancel_registration(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            event_id = data.get('event_id')
+            Registration.objects.filter(user=request.user, event_id=event_id).delete()
+            return JsonResponse({'success': True, 'message': '取消報名成功'})
+        except Registration.DoesNotExist:
+            return JsonResponse({'success': False, 'message': '找不到對應的報名紀錄'}, status=404)
+    else:
+        return JsonResponse({'success': False, 'message': '只接受 POST 方法'}, status=405)
+
 
 #====使用者相關====#
 
