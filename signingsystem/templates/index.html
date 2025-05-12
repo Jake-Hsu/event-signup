@@ -1,0 +1,194 @@
+{% load static %}<!-- 載入靜態資源 -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>單車活動報名系統</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}" /><!-- 本地 static 資料夾 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><!--外部的圖示套件 -->
+
+
+</head>
+
+<!--登入成功後顯示歡迎訊息 + 顯示我的報名-->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);//解析網址的參數
+      const loginSuccess = urlParams.get('login');
+  
+      if (loginSuccess === 'success') {
+          const username = "{{ username|escapejs }}";  // Django 會自動渲染成 "jake" 或你實際帳號
+          if (username) {
+              document.getElementById('loginResult').innerText = `登入成功！歡迎 ${username}`;
+              document.getElementById('mySignupLink').style.display = 'block';
+              
+          }
+      }
+  });
+  </script>
+  
+
+<body>
+    <header class="fixed-header">
+       <div class="menu-toggle" onclick="toggleMenu()">☰</div>  <!--切換頁面按鈕 -->
+      <div class="site-title">CyclingNomad</div>
+    </header>
+    
+    <!--sidebar-->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div id="sideMenu" class="side-menu">
+        <a href="#" onclick="showSection('home')">首頁</a>
+        <a href="#" onclick="showSection('events')">活動列表</a>
+        <a href="#" id="mySignupLink" style="display: none; " onclick="showSection('my')">我的報名</a>
+        <a href="#" onclick="googleOAuthLogin()">一鍵註冊</a>
+        <a href="#" onclick="showSection('login')">登入</a>
+    </div>
+    
+
+  <main class="container">
+    <!-- 首頁 -->
+    <section id="home" class="section" >
+      <div class = "hero" style = "display: block;">
+        <div class="hero-content">
+          <h1>Live Your Adventure</h1>
+          <div class="search-box">
+            <input type="text" id="homeSearchInput" placeholder="Find My Perfect Trip" />
+            <button onclick="submitHomeSearch()"><i class="fa fa-search"></i></button>   <!--fa : Font Awesome 放大鏡  fa-search = 放大鏡-->
+          </div>
+        </div>
+        <h1>歡迎來到單車活動報名系統</h1>
+        <p>我們致力於為全台熱愛騎行的人，打造一個簡單、快速又好用的活動報名平台！</p>
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>        
+
+      </div>
+    
+      <div class="intro">
+        <h2>我們能幫你什麼？</h2>
+        <p>你是否也曾經苦惱單車活動資訊分散，報名流程複雜？現在開始，所有活動都集中在這裡！</p>
+      </div>
+    
+      <div class="features">
+        <div class="feature-card">
+          <h3>輕鬆找活動</h3>
+          <p>用關鍵字或分類快速找到你想參加的活動。</p>
+        </div>
+        <div class="feature-card">
+          <h3>快速報名</h3>
+          <p>一鍵完成線上報名，無需填一堆表單。</p>
+        </div>
+        <div class="feature-card">
+          <h3>報名紀錄查詢</h3>
+          <p>登入後即可查看自己參加過的活動，方便又清楚。</p>
+        </div>
+      </div>
+      
+        
+    </section>
+
+    <section id="events" class="section" style="display: none;">
+      <h1>熱門單車活動</h1>
+      <div id="events-content">
+        <!-- 活動卡片會自動加進來 -->
+      </div>
+    </section>
+
+    <section id="my" class="section" style="display: none;">
+      <h1>我的報名</h1>
+      <p>這裡會顯示你報名過的活動（目前尚未報名任何活動）</p>
+    </section>
+
+
+
+
+    <section id="register" class="section" style="display: none;">
+      <h1>註冊</h1>
+       <form id="preRegisterForm">
+        <div class="form-row">
+          <div><input type="text" id="name" name="name" placeholder="姓名" required /></div>
+          <div><input type="text" id="username" name="username" placeholder="帳號" required /></div>
+        </div>
+
+        <div class="form-row">
+          <div><input type="password" id="password" name="password" placeholder="密碼" required /></div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <select id="gender" name="gender" required>
+              <option value="">選擇性別</option>
+              <option value="男">男</option>
+              <option value="女">女</option>
+            </select>
+          </div>
+          <div>
+            <select id="identity" name="identity" required>
+              <option value="">選擇身分</option>
+              <option value="高中職">高中職</option>
+              <option value="大專院校">大專院校</option>
+              <option value="在職">在職</option>
+            </select>
+          </div>
+        </div>
+        <div id="schoolSection" style="display: none;">
+          <div class="form-row">
+            <div><input type="text" id="school" name="school" placeholder="學校" /></div>
+            <div><input type="text" id="student_id" name="student_id" placeholder="學號" /></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div><input type="text" id="phone" name="phone" placeholder="手機號碼" required /></div>
+          <div>
+            <select id="region" name="region" required>
+              <option value="">選擇地區</option>
+              <option value="北部">北部</option>
+              <option value="中部">中部</option>
+              <option value="南部">南部</option>
+              <option value="東部">東部</option>
+              <option value="離島">離島</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" style="justify-content: center;">
+          <button type="submit">送出</button>
+        </div>
+      </form>
+
+    
+      <!-- Step 2: Google 登入（預設隱藏） -->
+      <div id="googleLoginSection" style="display: none; text-align: center; margin-top: 20px;">
+        <p>請使用 Google 完成註冊</p>
+        <a href="{% url 'social:begin' 'google-oauth2' %}?next=/complete_registration/">使用 Google 註冊/登入</a>
+      </div>
+    </section>
+    
+
+    <section id="login" class="section" style="display: none;">
+      <h1>登入</h1>
+      <form id="loginForm">
+        <input type="text" id="login-username" placeholder="帳號" required />
+        <input type="password" id="login-password" placeholder="密碼" required />
+        <button type="submit">登入</button>
+        <p id="loginResult" style="color: black;"></p>
+      </form>
+      <div style="text-align: center;">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">使用 Google 註冊/登入</a>
+      </div>
+      
+    </section>
+
+    
+  </main>
+
+  <footer>
+    <p>© 2025 單車活動報名系統 | Jake 製作</p>
+  </footer>
+  <script src="{% static 'app.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+/* ===== 首頁 ===== */
+
+header {
+  background-color: #2c3e50;
+  padding: 1rem 0;
+}
+
+.hero {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.search-box {
+  margin-top: 1.5rem;
+  display: flex;
+  background: white;
+  border-radius: 50px;
+  overflow: hidden;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-box input {
+  border: none;
+  padding: 1rem;
+  flex-grow: 1;
+  font-size: 1rem;
+}
+
+.search-box button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+}
+
+.intro {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #34495e;
+  color: white;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+}
+
+.feature-card h3 {
+  color: #2980b9;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== 活動列表 ===== */
+
+.event-card {
+  background-color: white;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h2 {
+  color: #2980b9;
+  margin-bottom: 0.5rem;
+}
+
+.event-card p {
+  margin-bottom: 0.5rem;
+}
+
+.event-card button {
+  padding: 0.5rem 1rem;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.event-card button:hover {
+  background-color: #219150;
+}
+
+/* ===== 報名 / 登入 ===== */
+
+#register {
+  background-image: url('img/background-R.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+#loginForm, #preRegisterForm {
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#loginForm input,
+#preRegisterForm input,
+#preRegisterForm select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+#loginForm button,
+#preRegisterForm button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#loginForm button:hover,
+#preRegisterForm button:hover {
+  background-color: #45a049;
+}
+
+#loginResult {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form-row > div {
+  flex: 1;
+}
+
+/* ===== 側邊欄 / 選單 ===== */
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #003366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.menu-toggle {
+  font-size: 26px;
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  left: 15px;
+  z-index: 1001;
+  border-radius: 4px;
+}
+
+.site-title {
+  font-size: 40px;
+  font-weight: bold;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.side-menu {
+  position: fixed;
+  top: 40px;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #222;
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.side-menu a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+/* ===== 共用設定 ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  opacity: 1;
+  background-color: #585755;
+}
+
+  
